@@ -20,7 +20,7 @@ const UserSchema = new Schema({
   image: {
     type: String,
   },
-  collection: {
+  records_collection: {
     type: [
       {
         type: Schema.Types.ObjectId,
