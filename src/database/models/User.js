@@ -20,11 +20,11 @@ const UserSchema = new Schema({
   image: {
     type: String,
   },
-  collection: {
+  records_collection: {
     type: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Record",
+        // ref: "Record",
       },
     ],
     default: [],
@@ -33,7 +33,7 @@ const UserSchema = new Schema({
     type: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Record",
+        // ref: "Record",
       },
     ],
     default: [],
