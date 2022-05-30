@@ -40,4 +40,20 @@ describe("Given a POST/user/login endpoint", () => {
       expect(token).not.toBeNull();
     });
   });
+
+  describe("When it receives a request with a users not present in the database", () => {
+    test("Then it should respond with a 403 status", async () => {
+      const user = {
+        username: "piero",
+        password: "piero",
+      };
+
+      const expectedErrorMessage = "Bad request";
+      const {
+        body: { message },
+      } = await request(app).post("/user/login").send(user).expect(403);
+
+      expect(message).toBe(expectedErrorMessage);
+    });
+  });
 });
