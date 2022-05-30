@@ -5,8 +5,11 @@ const User = require("../database/models/User");
 const mockUsers = require("../mocks/mockUsers");
 const app = require("../server/index");
 
+const mongoString =
+  "mongodb+srv://fra432:isdicoders@cluster2.hykgg.mongodb.net/test?retryWrites=true&w=majority";
+
 beforeAll(async () => {
-  await connectDB(process.env.MONGO_CONNECTION_TEST);
+  await connectDB(mongoString);
 });
 
 beforeEach(async () => {
