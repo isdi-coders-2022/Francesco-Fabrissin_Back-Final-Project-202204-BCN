@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node src",
     "start-dev": "nodemon src -q",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "jest --watchAll=false",
+    "test-coverage": "jest --coverage --watchAll=false"
   },
   "keywords": [],
   "author": "",
