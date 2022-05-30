@@ -34,7 +34,7 @@ const userLogin = async (req, res, next) => {
     return;
   }
 
-  const token = jsonwebtoken.sign(userData, process.env.JWT_SECRET);
+  const token = jsonwebtoken.sign(userData, "292377722c2c6c375c2b623ebdfcfa1e");
 
   res.status(200).json({ token });
 };
