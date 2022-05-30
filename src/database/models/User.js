@@ -24,7 +24,7 @@ const UserSchema = new Schema({
     type: [
       {
         type: Schema.Types.ObjectId,
-        // ref: "Record",
+        ref: "Record",
       },
     ],
     default: [],
@@ -33,7 +33,7 @@ const UserSchema = new Schema({
     type: [
       {
         type: Schema.Types.ObjectId,
-        // ref: "Record",
+        ref: "Record",
       },
     ],
     default: [],
