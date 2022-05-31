@@ -1,10 +1,16 @@
 const bcrypt = require("bcrypt");
 const jsonwebtoken = require("jsonwebtoken");
+const path = require("path");
 const User = require("../database/models/User");
 const mockUsers = require("../mocks/mockUsers");
 const { userLogin, userRegister } = require("./userControllers");
 
 const mockToken = "token";
+
+jest.mock("fs", () => ({
+  ...jest.requireActual("fs"),
+  rename: jest.fn().mockReturnValue("1234image.jpg"),
+}));
 
 describe("Given a userLogin function", () => {
   const req = {
@@ -71,12 +77,19 @@ describe("Given a userLogin function", () => {
 describe("Given a userRegister function", () => {
   const req = {
     body: mockUsers[0],
+    file: {
+      filename: "12798217782",
+      originalname: "image.jpg",
+    },
   };
 
   const res = {
     status: jest.fn().mockReturnThis(),
     json: jest.fn(),
   };
+
+  jest.spyOn(path, "join").mockResolvedValue("image");
+
   describe("When invoked with new users credentials in its body", () => {
     test("Then it should call the response's status method with 201", async () => {
       const expectedStatus = 201;

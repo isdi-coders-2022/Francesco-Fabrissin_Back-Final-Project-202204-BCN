@@ -2,6 +2,8 @@ require("dotenv").config();
 const debug = require("debug")("recordswapp:controllers:userControllers");
 const bcrypt = require("bcrypt");
 const jsonwebtoken = require("jsonwebtoken");
+const fs = require("fs");
+const path = require("path");
 const chalk = require("chalk");
 const User = require("../database/models/User");
 const customError = require("../utils/customError");
@@ -41,24 +43,38 @@ const userLogin = async (req, res, next) => {
 };
 
 const userRegister = async (req, res, next) => {
-  const { username, password, email, location, image } = req.body;
-
-  const user = await User.findOne({ username });
-
-  if (user) {
-    const error = customError(409, "Conflict", "This user already exists");
-    next(error);
-    return;
-  }
-
   try {
+    const { username, password, email, location } = req.body;
+    const { file } = req;
+
+    const user = await User.findOne({ username });
+
+    if (user) {
+      const error = customError(409, "Conflict", "This user already exists");
+      next(error);
+      return;
+    }
+
+    const newImageName = `${Date.now()}${file.originalname}`;
+
+    fs.rename(
+      path.join("uploads", "images", file.filename),
+      path.join("uploads", "images", newImageName),
+      async (error) => {
+        if (error) {
+          next(error);
+        }
+      }
+    );
+
     const encryptedPassword = await bcrypt.hash(password, 10);
+
     const newUser = {
       username,
       password: encryptedPassword,
       email,
       location,
-      image: image ?? "",
+      image: path.join("images", newImageName),
     };
 
     await User.create(newUser);
