@@ -42,6 +42,7 @@ const userLogin = async (req, res, next) => {
 
 const userRegister = async (req, res, next) => {
   const { username, password, email, location, image } = req.body;
+
   const user = await User.findOne({ username });
 
   if (user) {
