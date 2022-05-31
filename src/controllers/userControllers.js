@@ -55,17 +55,19 @@ const userRegister = async (req, res, next) => {
       return;
     }
 
-    const newImageName = `${Date.now()}${file.originalname}`;
+    const newImageName = file ? `${Date.now()}${file.originalname}` : "";
 
-    fs.rename(
-      path.join("uploads", "images", file.filename),
-      path.join("uploads", "images", newImageName),
-      async (error) => {
-        if (error) {
-          next(error);
+    if (file) {
+      fs.rename(
+        path.join("uploads", "images", file.filename),
+        path.join("uploads", "images", newImageName),
+        async (error) => {
+          if (error) {
+            next(error);
+          }
         }
-      }
-    );
+      );
+    }
 
     const encryptedPassword = await bcrypt.hash(password, 10);
 
@@ -74,7 +76,7 @@ const userRegister = async (req, res, next) => {
       password: encryptedPassword,
       email,
       location,
-      image: path.join("images", newImageName),
+      image: file ? path.join("images", newImageName) : "",
     };
 
     await User.create(newUser);
