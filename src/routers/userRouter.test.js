@@ -55,3 +55,22 @@ describe("Given a POST/user/login endpoint", () => {
     });
   });
 });
+
+describe("Given a POST/user/register endpoint", () => {
+  describe("When it receives a request with a users present in the database", () => {
+    test("Then it should respond with a 200 status and a token", async () => {
+      const newUser = {
+        username: "sergio",
+        password: "sergio",
+        email: "sergiosergio@gmail.com",
+        location: "Barcelona",
+      };
+
+      const {
+        body: { username },
+      } = await request(app).post("/user/register").send(newUser).expect(201);
+
+      expect(username).toBe("sergio");
+    });
+  });
+});
