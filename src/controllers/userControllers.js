@@ -80,7 +80,7 @@ const userRegister = async (req, res, next) => {
     };
 
     await User.create(newUser);
-    res.status(201).json({ newUser });
+    res.status(201).json({ new_user: { username: newUser.username } });
   } catch {
     const error = customError(400, "Bad request", "Wrong user data");
     next(error);
