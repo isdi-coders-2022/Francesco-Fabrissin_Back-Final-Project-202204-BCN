@@ -16,3 +16,6 @@ jobs:
 
       - name: Testing
         run: npm run test
+        env:
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          MONGO_CONNECTION_TEST: ${{ secrets.MONGO_CONNECTION_TEST }}

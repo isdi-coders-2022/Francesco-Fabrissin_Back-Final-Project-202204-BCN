@@ -24,7 +24,7 @@ const userLogin = async (req, res, next) => {
 
   const userData = {
     username: user.username,
-    image: user.image,
+    image: username.image,
   };
 
   const rightPassowrd = await bcrypt.compare(password, user.password);
@@ -35,7 +35,7 @@ const userLogin = async (req, res, next) => {
     return;
   }
 
-  const token = jsonwebtoken.sign(userData, "292377722c2c6c375c2b623ebdfcfa1e");
+  const token = jsonwebtoken.sign(userData, process.env.JWT_SECRET);
 
   res.status(200).json({ token });
 };
