@@ -13,4 +13,20 @@ const credentialsLoginSchema = {
   }),
 };
 
-module.exports = { credentialsLoginSchema };
+const credentialsRegisterSchema = {
+  body: Joi.object({
+    username: Joi.string()
+      .max(15)
+      .message({ message: "Username is required" })
+      .required(),
+    email: Joi.string().max(30).message({ message: "email is required" }),
+    password: Joi.string()
+      .max(20)
+      .message({ message: "Password is required" })
+      .required(),
+    location: Joi.string(),
+    image: Joi.string(),
+  }),
+};
+
+module.exports = { credentialsLoginSchema, credentialsRegisterSchema };
