@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const jsonwebtoken = require("jsonwebtoken");
 const User = require("../database/models/User");
 const mockUsers = require("../mocks/mockUsers");
-const userLogin = require("./userControllers");
+const { userLogin } = require("./userControllers");
 
 const mockToken = "token";
 
