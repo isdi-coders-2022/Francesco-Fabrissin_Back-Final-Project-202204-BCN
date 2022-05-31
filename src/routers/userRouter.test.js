@@ -49,6 +49,7 @@ describe("Given a POST/user/login endpoint", () => {
       };
 
       const expectedErrorMessage = "Bad request";
+
       const {
         body: { message },
       } = await request(app).post("/user/login").send(user).expect(403);
