@@ -67,7 +67,9 @@ describe("Given a POST/user/register endpoint", () => {
       };
 
       const {
-        body: { username },
+        body: {
+          newUser: { username },
+        },
       } = await request(app).post("/user/register").send(newUser).expect(201);
 
       expect(username).toBe("sergio");
