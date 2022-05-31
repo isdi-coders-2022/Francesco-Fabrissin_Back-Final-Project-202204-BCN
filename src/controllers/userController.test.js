@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const jsonwebtoken = require("jsonwebtoken");
 const User = require("../database/models/User");
 const mockUsers = require("../mocks/mockUsers");
-const { userLogin } = require("./userControllers");
+const { userLogin, userRegister } = require("./userControllers");
 
 const mockToken = "token";
 
@@ -64,6 +64,58 @@ describe("Given a userLogin function", () => {
       const expectedError = new Error(expectedErrorMessage);
 
       expect(next).toHaveBeenCalledWith(expectedError);
+    });
+  });
+});
+
+describe("Given a userRegister function", () => {
+  const req = {
+    body: mockUsers[0],
+  };
+
+  const res = {
+    status: jest.fn().mockReturnThis(),
+    json: jest.fn(),
+  };
+  describe("When invoked with new users credentials in its body", () => {
+    test("Then it should call the response's status method with 201", async () => {
+      const expectedStatus = 201;
+
+      User.findOne = jest.fn().mockResolvedValue(false);
+      bcrypt.hash = jest.fn().mockResolvedValue("hashedPassword");
+      User.create = jest.fn().mockResolvedValue(mockUsers[0]);
+
+      await userRegister(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(expectedStatus);
+    });
+  });
+
+  describe("When it is called with a user that is already in the database", () => {
+    test("Then it should call the 'next' received function with an error 'This user already exists'", async () => {
+      const expectedErrorMessage = "This user already exists";
+
+      const next = jest.fn();
+
+      User.findOne = jest.fn().mockResolvedValue(true);
+
+      await userRegister(req, res, next);
+      const expectedError = new Error(expectedErrorMessage);
+
+      expect(next).toHaveBeenCalledWith(expectedError);
+    });
+  });
+
+  describe("When it is called and the User.create method fails", () => {
+    test("Then it should call the 'next' received function", async () => {
+      const next = jest.fn();
+
+      User.findOne = jest.fn().mockResolvedValue(false);
+      User.create = jest.fn().mockRejectedValue();
+
+      await userRegister(req, res, next);
+
+      expect(next).toHaveBeenCalled();
     });
   });
 });
