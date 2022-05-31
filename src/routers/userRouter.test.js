@@ -5,6 +5,11 @@ const User = require("../database/models/User");
 const mockUsers = require("../mocks/mockUsers");
 const app = require("../server/index");
 
+jest.mock("fs", () => ({
+  ...jest.requireActual("fs"),
+  rename: jest.fn().mockReturnValue("1234image.jpg"),
+}));
+
 beforeAll(async () => {
   await connectDB(process.env.MONGO_CONNECTION_TEST);
 });
@@ -52,27 +57,6 @@ describe("Given a POST/user/login endpoint", () => {
       } = await request(app).post("/user/login").send(user).expect(403);
 
       expect(message).toBe(expectedErrorMessage);
-    });
-  });
-});
-
-describe("Given a POST/user/register endpoint", () => {
-  describe("When it receives a request with a users present in the database", () => {
-    test("Then it should respond with a 200 status and a token", async () => {
-      const newUser = {
-        username: "sergio",
-        password: "sergio",
-        email: "sergiosergio@gmail.com",
-        location: "Barcelona",
-      };
-
-      const {
-        body: {
-          newUser: { username },
-        },
-      } = await request(app).post("/user/register").send(newUser).expect(201);
-
-      expect(username).toBe("sergio");
     });
   });
 });
