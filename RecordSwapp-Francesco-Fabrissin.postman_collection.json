@@ -1,219 +1,197 @@
 {
-	"info": {
-		"_postman_id": "70ce9c4a-5e3a-4e8e-8e1b-02feca4e55ef",
-		"name": "RecordSwapp-Francesco-Fabrissin",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "20644651"
-	},
-	"item": [
-		{
-			"name": "local login",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"username\": \"fra432\",\n    \"password\": \"fra432\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{origin}}/user/login",
-					"host": [
-						"{{origin}}"
-					],
-					"path": [
-						"user",
-						"login"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "local-register",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "username",
-							"value": "frassxssdgll",
-							"type": "text"
-						},
-						{
-							"key": "password",
-							"value": "fra",
-							"type": "text"
-						},
-						{
-							"key": "email",
-							"value": "fra",
-							"type": "text"
-						},
-						{
-							"key": "location",
-							"value": "fra",
-							"type": "text"
-						},
-						{
-							"key": "image",
-							"type": "file",
-							"src": []
-						}
-					]
-				},
-				"url": {
-					"raw": "http://localhost:4005/user/register",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "4005",
-					"path": [
-						"user",
-						"register"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "onrender-login",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "username",
-							"value": "jdjds",
-							"type": "text"
-						},
-						{
-							"key": "password",
-							"value": "sjsj",
-							"type": "text"
-						},
-						{
-							"key": "email",
-							"value": "dhdh",
-							"type": "text"
-						},
-						{
-							"key": "location",
-							"value": "sjsj",
-							"type": "text"
-						},
-						{
-							"key": "image",
-							"type": "file",
-							"src": "/Users/francescofabrissin/Desktop/Foto/20030743_10211823465655797_1767479257_n.png"
-						}
-					]
-				},
-				"url": {
-					"raw": "{{onrender-origin}}user/login",
-					"host": [
-						"{{onrender-origin}}user"
-					],
-					"path": [
-						"login"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "onrender-register",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "username",
-							"value": "jdjds",
-							"type": "text"
-						},
-						{
-							"key": "password",
-							"value": "sjsj",
-							"type": "text"
-						},
-						{
-							"key": "email",
-							"value": "dhdh",
-							"type": "text"
-						},
-						{
-							"key": "location",
-							"value": "sjsj",
-							"type": "text"
-						},
-						{
-							"key": "image",
-							"type": "file",
-							"src": "/Users/francescofabrissin/Desktop/Foto/20030743_10211823465655797_1767479257_n.png"
-						}
-					]
-				},
-				"url": {
-					"raw": "{{onrender-origin}}user/register",
-					"host": [
-						"{{onrender-origin}}user"
-					],
-					"path": [
-						"register"
-					]
-				}
-			},
-			"response": []
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		}
-	],
-	"variable": [
-		{
-			"key": "origin",
-			"value": "http://localhost:4005/",
-			"type": "string"
-		},
-		{
-			"key": "onrender-origin",
-			"value": "https://francesco-fabrissin-back-final-project.onrender.com/",
-			"type": "string"
-		}
-	]
+  "info": {
+    "_postman_id": "70ce9c4a-5e3a-4e8e-8e1b-02feca4e55ef",
+    "name": "RecordSwapp-Francesco-Fabrissin",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "20644651"
+  },
+  "item": [
+    {
+      "name": "local login",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\": \"fra432\",\n    \"password\": \"fra432\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{origin}}/user/login",
+          "host": ["{{origin}}"],
+          "path": ["user", "login"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "local-register",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "username",
+              "value": "frassxssdgll",
+              "type": "text"
+            },
+            {
+              "key": "password",
+              "value": "fra",
+              "type": "text"
+            },
+            {
+              "key": "email",
+              "value": "fra",
+              "type": "text"
+            },
+            {
+              "key": "location",
+              "value": "fra",
+              "type": "text"
+            },
+            {
+              "key": "image",
+              "type": "file",
+              "src": []
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:4005/user/register",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4005",
+          "path": ["user", "register"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "onrender-login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "username",
+              "value": "jdjds",
+              "type": "text"
+            },
+            {
+              "key": "password",
+              "value": "sjsj",
+              "type": "text"
+            },
+            {
+              "key": "email",
+              "value": "dhdh",
+              "type": "text"
+            },
+            {
+              "key": "location",
+              "value": "sjsj",
+              "type": "text"
+            },
+            {
+              "key": "image",
+              "type": "file",
+              "src": "/Users/francescofabrissin/Desktop/Foto/20030743_10211823465655797_1767479257_n.png"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{onrender-origin}}user/login",
+          "host": ["{{onrender-origin}}user"],
+          "path": ["login"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "onrender-register",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "username",
+              "value": "jdjds",
+              "type": "text"
+            },
+            {
+              "key": "password",
+              "value": "sjsj",
+              "type": "text"
+            },
+            {
+              "key": "email",
+              "value": "dhdh",
+              "type": "text"
+            },
+            {
+              "key": "location",
+              "value": "sjsj",
+              "type": "text"
+            },
+            {
+              "key": "image",
+              "type": "file",
+              "src": "/Users/francescofabrissin/Desktop/Foto/20030743_10211823465655797_1767479257_n.png"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{onrender-origin}}user/register",
+          "host": ["{{onrender-origin}}user"],
+          "path": ["register"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "origin",
+      "value": "http://localhost:4005/",
+      "type": "string"
+    },
+    {
+      "key": "onrender-origin",
+      "value": "https://francesco-fabrissin-back-final-project.onrender.com/",
+      "type": "string"
+    }
+  ]
 }
