@@ -60,3 +60,30 @@ describe("Given a POST/user/login endpoint", () => {
     });
   });
 });
+
+describe("Given a POST/user/register endpoint", () => {
+  describe("When it receives a request with a users present in the database", () => {
+    test("Then it should respond with a 200 status and a token", async () => {
+      const testFile = "test file";
+
+      const {
+        body: {
+          new_user: { username },
+        },
+      } = await request(app)
+        .post("/user/register")
+        .type("multipart/form-data")
+        .field("username", "sergio")
+        .field("password", "sergio")
+        .field("email", "sergiosergio@gmail.com")
+        .field("location", "Barcelona")
+        .attach("image", Buffer.from(testFile, "utf-8"), {
+          filename: "12798217782",
+          originalname: "image.jpg",
+        })
+        .expect(201);
+
+      expect(username).toBe("sergio");
+    });
+  });
+});
