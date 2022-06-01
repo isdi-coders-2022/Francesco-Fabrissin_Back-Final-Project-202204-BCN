@@ -2,7 +2,6 @@ require("dotenv").config();
 const debug = require("debug")("recordswapp:server:middlewares:errors");
 const chalk = require("chalk");
 const { ValidationError } = require("express-validation");
-const { rest } = require("msw");
 const customError = require("../../utils/customError");
 
 const notFoundError = (req, res, next) => {
