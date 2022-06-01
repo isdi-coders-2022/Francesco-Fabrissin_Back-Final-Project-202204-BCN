@@ -22,13 +22,19 @@ const UserSchema = new Schema({
     type: String,
   },
   records_collection: {
-    type: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Record",
-      },
-    ],
-    default: [],
+    collection: {
+      type: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "Record",
+        },
+      ],
+      default: [],
+    },
+    genre: {
+      type: String,
+      default: "Mixed",
+    },
   },
   wantlist: {
     type: [
