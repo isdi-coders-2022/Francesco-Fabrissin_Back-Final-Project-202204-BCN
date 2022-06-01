@@ -14,7 +14,7 @@ app.use(helmet());
 app.use(express.json());
 
 app.use("/user", userRouter);
-app.use("/users/collections", usersRouter);
+app.use("/users", usersRouter);
 
 app.use(notFoundError);
 app.use(generalError);

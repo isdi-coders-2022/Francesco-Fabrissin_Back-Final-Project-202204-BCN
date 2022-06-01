@@ -4,7 +4,10 @@ const mockUsers = [
     password: "$2a$10$fvX34xBeots6dRezw8IQJ.g/diQHdPQefkscaQdoBXqd5ThlSggAS",
     email: "frafra@gmail.com",
     location: "Barcelona",
-    records_collection: [],
+    records_collection: {
+      collection: [],
+      genre: "Electronic",
+    },
     wantlist: [],
   },
   {
@@ -12,7 +15,10 @@ const mockUsers = [
     password: "$2a$10$fvX34xBeots6dRezw8IQJ.g/diQHdPQefkscaQdoBXqd5ThlSggAF",
     email: "niconico@gmail.com",
     location: "Barcelona",
-    records_collection: [],
+    records_collection: {
+      collection: [],
+      genre: "Electronic",
+    },
     wantlist: [],
   },
 ];
