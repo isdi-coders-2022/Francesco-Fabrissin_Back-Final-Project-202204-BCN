@@ -15,6 +15,7 @@ app.use(express.json());
 
 app.use("/user", userRouter);
 app.use("/users", usersRouter);
+app.use("/myCollection", userRouter);
 
 app.use(notFoundError);
 app.use(generalError);
