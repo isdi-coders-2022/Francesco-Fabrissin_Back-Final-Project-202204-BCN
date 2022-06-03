@@ -159,7 +159,7 @@ describe("Given a getCollection function", () => {
       await getCollection(req, res);
 
       expect(res.status).toHaveBeenCalledWith(expectedStatus);
-      expect(res.json).toHaveBeenCalledWith(mockRecords);
+      expect(res.json).toHaveBeenCalledWith(expectedJsonResponse);
     });
   });
 
