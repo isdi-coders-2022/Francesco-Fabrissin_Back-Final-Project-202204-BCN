@@ -1,6 +1,6 @@
 const auth = require("./auth");
 
-const mockReq = { id: 3 };
+const mockReq = { username: "fra432" };
 
 jest.mock("jsonwebtoken", () => ({
   ...jest.requireActual("jsonwebtoken"),
@@ -26,7 +26,7 @@ describe("Given an auth function", () => {
 
       auth(req, null, next);
 
-      expect(req).toHaveProperty("userId", mockReq.id);
+      expect(req).toHaveProperty("username", mockReq.username);
     });
   });
 

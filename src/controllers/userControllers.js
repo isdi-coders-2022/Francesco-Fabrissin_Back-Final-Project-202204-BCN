@@ -99,6 +99,7 @@ const getCollection = async (req, res, next) => {
       path: "records_collection",
       populate: {
         path: "records",
+        model: Record,
       },
     });
     res.status(200).json(records);

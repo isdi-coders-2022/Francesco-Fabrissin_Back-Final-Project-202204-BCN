@@ -2,8 +2,9 @@ const bcrypt = require("bcrypt");
 const jsonwebtoken = require("jsonwebtoken");
 const path = require("path");
 const User = require("../database/models/User");
+const { default: mockRecords } = require("../mocks/mockRecords");
 const mockUsers = require("../mocks/mockUsers");
-const { userLogin, userRegister } = require("./userControllers");
+const { userLogin, userRegister, getCollection } = require("./userControllers");
 
 const mockToken = "token";
 
@@ -127,6 +128,46 @@ describe("Given a userRegister function", () => {
       User.create = jest.fn().mockRejectedValue();
 
       await userRegister(req, res, next);
+
+      expect(next).toHaveBeenCalled();
+    });
+  });
+});
+
+describe("Given a getCollection function", () => {
+  const req = {
+    username: "fra432",
+  };
+
+  const res = {
+    status: jest.fn().mockReturnThis(),
+    json: jest.fn(),
+  };
+  describe("When invoked with a valid token", () => {
+    test("Then it should call the response's status method with 200 and the json methos with an array of records", async () => {
+      User.findOne = jest.fn(() => ({
+        populate: jest.fn().mockReturnValue({
+          records_collection: {
+            records: mockRecords,
+          },
+        }),
+      }));
+
+      await getCollection(req, res);
+
+      expect(res.status).toHaveBeenCalled();
+    });
+  });
+
+  describe("When invoked with an invalid token", () => {
+    test("Then it should call the response's status method with 200", async () => {
+      const next = jest.fn();
+
+      User.findOne = jest.fn(() => ({
+        populate: jest.fn().mockRejectedValue(),
+      }));
+
+      await getCollection(req, res, next);
 
       expect(next).toHaveBeenCalled();
     });
