@@ -16,6 +16,10 @@ app.use(
     crossOriginEmbedderPolicy: false,
   })
 );
+app.use((_req, res, next) => {
+  res.setHeader("Cross-Origin-Resource-Policy", "same-site");
+  next();
+});
 app.use(express.static("uploads"));
 app.use(express.json());
 
