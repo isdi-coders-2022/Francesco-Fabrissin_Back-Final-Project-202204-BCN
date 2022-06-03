@@ -36,33 +36,20 @@ const addRecordToCollection = async (req, res, next) => {
     };
 
     const addedRecord = await Record.create(newRecord);
-
-    if (addedRecord) {
-      debug(chalk.greenBright("Record added to database"));
-    } else {
-      const error = customError(400, "Bad request", "Unable to add new record");
-      next(error);
-      return;
-    }
+    debug(chalk.greenBright("Record added to database"));
 
     const user = await User.findById(userId);
     user.records_collection.records.push(addedRecord);
     const userUpdated = await User.findByIdAndUpdate(userId, user, {
       new: true,
     });
-
     if (userUpdated) {
       debug(chalk.greenBright("Record added to user collection"));
-      res.status(201).json(addedRecord);
-    } else {
-      const error = customError(
-        400,
-        "Bad request",
-        "Unable to update collection"
-      );
-      next(error);
     }
-  } catch (error) {
+
+    res.status(201).json(addedRecord);
+  } catch {
+    const error = customError(400, "Bad request", "Unable to add new record");
     next(error);
   }
 };

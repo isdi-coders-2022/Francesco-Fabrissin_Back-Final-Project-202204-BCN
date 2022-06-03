@@ -1,7 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 const path = require("path");
-const { addRecordToCollection } = require("../controllers/recordsController");
+const { addRecordToCollection } = require("../controllers/recordsControllers");
 const auth = require("../server/middlewares/auth");
 
 const recordsRouter = express.Router();
