@@ -45,6 +45,7 @@ const userLogin = async (req, res, next) => {
 };
 
 const userRegister = async (req, res, next) => {
+  debug(chalk.yellowBright("New registration request received"));
   try {
     const { username, password, email, location } = req.body;
     const { file } = req;
@@ -92,10 +93,10 @@ const userRegister = async (req, res, next) => {
 const getCollection = async (req, res, next) => {
   debug(chalk.yellowBright("New 'My collection' request"));
   try {
-    const { username } = req;
+    const { userId } = req;
     const {
       records_collection: { records },
-    } = await User.findOne({ username }).populate({
+    } = await User.findById(userId).populate({
       path: "records_collection",
       populate: {
         path: "records",
@@ -109,4 +110,8 @@ const getCollection = async (req, res, next) => {
   }
 };
 
-module.exports = { userLogin, userRegister, getCollection };
+module.exports = {
+  userLogin,
+  userRegister,
+  getCollection,
+};

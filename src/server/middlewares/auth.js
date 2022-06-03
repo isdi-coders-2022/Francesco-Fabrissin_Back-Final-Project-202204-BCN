@@ -10,8 +10,8 @@ const auth = (req, res, next) => {
       next(error);
     }
     const token = authorization.replace("Bearer ", "");
-    const { username } = jwt.verify(token, process.env.JWT_SECRET);
-    req.username = username;
+    const { id } = jwt.verify(token, process.env.JWT_SECRET);
+    req.userId = id;
 
     next();
   } catch {
