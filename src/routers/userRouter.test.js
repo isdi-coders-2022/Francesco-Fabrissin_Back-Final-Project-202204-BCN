@@ -109,3 +109,43 @@ describe("Given a POST/user/register endpoint", () => {
     });
   });
 });
+
+describe("Given a GET/users endpoint", () => {
+  describe("When it receives a request with a valid token", () => {
+    test("Then it should respond with a 200 status and a list of users collections", async () => {
+      const user = {
+        username: "fra432",
+        password: "fra432",
+      };
+
+      const {
+        body: { token },
+      } = await request(app).post("/user/login").send(user).expect(200);
+
+      const {
+        body: { usersCollection },
+      } = await request(app)
+        .get("/users")
+        .set("Authorization", `Bearer ${token}`)
+        .expect(200);
+
+      expect(usersCollection[0]).toHaveProperty("username", "fra432");
+    });
+  });
+
+  describe("When it receives a request with an invalid token", () => {
+    test("Then it should respond with a 200 status and a list of users collections", async () => {
+      const invalidToken = "no bearer";
+      const expectedErrorMessage = "Bad request";
+
+      const {
+        body: { message },
+      } = await request(app)
+        .get("/users")
+        .set("Authorization", invalidToken)
+        .expect(401);
+
+      expect(message).toBe(expectedErrorMessage);
+    });
+  });
+});
