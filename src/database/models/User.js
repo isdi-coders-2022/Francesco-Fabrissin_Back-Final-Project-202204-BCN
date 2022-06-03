@@ -22,7 +22,7 @@ const UserSchema = new Schema({
     type: String,
   },
   records_collection: {
-    collection: {
+    records: {
       type: [
         {
           type: Schema.Types.ObjectId,
