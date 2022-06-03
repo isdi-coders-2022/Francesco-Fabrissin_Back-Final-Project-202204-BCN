@@ -1,268 +1,240 @@
 {
-	"info": {
-		"_postman_id": "70ce9c4a-5e3a-4e8e-8e1b-02feca4e55ef",
-		"name": "RecordSwapp-Francesco-Fabrissin",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "20644651"
-	},
-	"item": [
-		{
-			"name": "local login",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"username\": \"fra432\",\n    \"password\": \"fra432\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{origin}}/user/login",
-					"host": [
-						"{{origin}}"
-					],
-					"path": [
-						"user",
-						"login"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "local register",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "username",
-							"value": "frassxs",
-							"type": "text"
-						},
-						{
-							"key": "password",
-							"value": "fra",
-							"type": "text"
-						},
-						{
-							"key": "email",
-							"value": "fra",
-							"type": "text"
-						},
-						{
-							"key": "location",
-							"value": "fra",
-							"type": "text"
-						},
-						{
-							"key": "image",
-							"type": "file",
-							"src": "/Users/francescofabrissin/Desktop/Foto/20030743_10211823465655797_1767479257_n.png"
-						}
-					]
-				},
-				"url": {
-					"raw": "{{origin}}/user/register",
-					"host": [
-						"{{origin}}"
-					],
-					"path": [
-						"user",
-						"register"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "onrender login",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "username",
-							"value": "jdjds",
-							"type": "text"
-						},
-						{
-							"key": "password",
-							"value": "sjsj",
-							"type": "text"
-						},
-						{
-							"key": "email",
-							"value": "dhdh",
-							"type": "text"
-						},
-						{
-							"key": "location",
-							"value": "sjsj",
-							"type": "text"
-						},
-						{
-							"key": "image",
-							"type": "file",
-							"src": "/Users/francescofabrissin/Desktop/Foto/20030743_10211823465655797_1767479257_n.png"
-						}
-					]
-				},
-				"url": {
-					"raw": "{{onrender-origin}}user/login",
-					"host": [
-						"{{onrender-origin}}user"
-					],
-					"path": [
-						"login"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "onrender register",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "username",
-							"value": "jdjds",
-							"type": "text"
-						},
-						{
-							"key": "password",
-							"value": "sjsj",
-							"type": "text"
-						},
-						{
-							"key": "email",
-							"value": "dhdh",
-							"type": "text"
-						},
-						{
-							"key": "location",
-							"value": "sjsj",
-							"type": "text"
-						},
-						{
-							"key": "image",
-							"type": "file",
-							"src": "/Users/francescofabrissin/Desktop/Foto/20030743_10211823465655797_1767479257_n.png"
-						}
-					]
-				},
-				"url": {
-					"raw": "{{onrender-origin}}user/register",
-					"host": [
-						"{{onrender-origin}}user"
-					],
-					"path": [
-						"register"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get users with auth - local",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODhhYzU0ZWU3NmI3MGNiNTU0NGMyNSIsIm5hbWUiOiJQaWVybyIsInVzZXJuYW1lIjoicGllcnVzIiwiZnJpZW5kcyI6W10sImlhdCI6MTY1MzIxNDIxMX0.B51oPRjijEroge17wky8e3psypbKcEAE0_oLOobsM4Y",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{origin}}/users",
-					"host": [
-						"{{origin}}"
-					],
-					"path": [
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "{{onrender-origin}}users",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{onrender-origin}}users",
-					"host": [
-						"{{onrender-origin}}users"
-					]
-				}
-			},
-			"response": []
-		}
-	],
-	"auth": {
-		"type": "bearer",
-		"bearer": [
-			{
-				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImZyYTQzMiIsImltYWdlIjoiaHR0cHM6Ly92aWRlby1lY3YxLTEueHguZmJjZG4ubmV0L3YvdDEuNjQzNS05LzM3ODY3NjQzXzIxODE3OTAxMjg3NzIwNzlfMzQ5NjY4NTY5MDYwOTk5MTY4MF9uLmpwZz9fbmNfY2F0PTEwOCZjY2I9MS03Jl9uY19zaWQ9MDljYmZlJl9uY19vaGM9TFhTcTdRdURaZ1FBWF8xdDcwWiZfbmNfaHQ9dmlkZW8tZWN2MS0xLnh4Jm9oPTAwX0FULVl0aC1vT2lCWTV0WVVVaF9vbnZaRWZ4RkU5SDFkcXdVeno3NWQ1WXNVRHcmb2U9NjJCQ0U5NkEiLCJpYXQiOjE2NTQxNTgwNDV9.JiucwIqOJ1NgPXSFgUuXvcyar0fFrA-ylEyyUhxwKts",
-				"type": "string"
-			}
-		]
-	},
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		}
-	],
-	"variable": [
-		{
-			"key": "origin",
-			"value": "http://localhost:4005/",
-			"type": "string"
-		},
-		{
-			"key": "onrender-origin",
-			"value": "https://francesco-fabrissin-back-final-project.onrender.com/",
-			"type": "string"
-		}
-	]
+  "info": {
+    "_postman_id": "70ce9c4a-5e3a-4e8e-8e1b-02feca4e55ef",
+    "name": "RecordSwapp-Francesco-Fabrissin",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "20644651"
+  },
+  "item": [
+    {
+      "name": "local login",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\": \"fra432\",\n    \"password\": \"fra432\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{origin}}/user/login",
+          "host": ["{{origin}}"],
+          "path": ["user", "login"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "local register",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "username",
+              "value": "frassxs",
+              "type": "text"
+            },
+            {
+              "key": "password",
+              "value": "fra",
+              "type": "text"
+            },
+            {
+              "key": "email",
+              "value": "fra",
+              "type": "text"
+            },
+            {
+              "key": "location",
+              "value": "fra",
+              "type": "text"
+            },
+            {
+              "key": "image",
+              "type": "file",
+              "src": "/Users/francescofabrissin/Desktop/Foto/20030743_10211823465655797_1767479257_n.png"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{origin}}/user/register",
+          "host": ["{{origin}}"],
+          "path": ["user", "register"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "onrender login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "username",
+              "value": "jdjds",
+              "type": "text"
+            },
+            {
+              "key": "password",
+              "value": "sjsj",
+              "type": "text"
+            },
+            {
+              "key": "email",
+              "value": "dhdh",
+              "type": "text"
+            },
+            {
+              "key": "location",
+              "value": "sjsj",
+              "type": "text"
+            },
+            {
+              "key": "image",
+              "type": "file",
+              "src": "/Users/francescofabrissin/Desktop/Foto/20030743_10211823465655797_1767479257_n.png"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{onrender-origin}}user/login",
+          "host": ["{{onrender-origin}}user"],
+          "path": ["login"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "onrender register",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "username",
+              "value": "jdjds",
+              "type": "text"
+            },
+            {
+              "key": "password",
+              "value": "sjsj",
+              "type": "text"
+            },
+            {
+              "key": "email",
+              "value": "dhdh",
+              "type": "text"
+            },
+            {
+              "key": "location",
+              "value": "sjsj",
+              "type": "text"
+            },
+            {
+              "key": "image",
+              "type": "file",
+              "src": "/Users/francescofabrissin/Desktop/Foto/20030743_10211823465655797_1767479257_n.png"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{onrender-origin}}user/register",
+          "host": ["{{onrender-origin}}user"],
+          "path": ["register"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get users with auth - local",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODhhYzU0ZWU3NmI3MGNiNTU0NGMyNSIsIm5hbWUiOiJQaWVybyIsInVzZXJuYW1lIjoicGllcnVzIiwiZnJpZW5kcyI6W10sImlhdCI6MTY1MzIxNDIxMX0.B51oPRjijEroge17wky8e3psypbKcEAE0_oLOobsM4Y",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{origin}}/users",
+          "host": ["{{origin}}"],
+          "path": ["users"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "{{onrender-origin}}users",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{onrender-origin}}users",
+          "host": ["{{onrender-origin}}users"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImZyYTQzMiIsImltYWdlIjoiaHR0cHM6Ly92aWRlby1lY3YxLTEueHguZmJjZG4ubmV0L3YvdDEuNjQzNS05LzM3ODY3NjQzXzIxODE3OTAxMjg3NzIwNzlfMzQ5NjY4NTY5MDYwOTk5MTY4MF9uLmpwZz9fbmNfY2F0PTEwOCZjY2I9MS03Jl9uY19zaWQ9MDljYmZlJl9uY19vaGM9TFhTcTdRdURaZ1FBWF8xdDcwWiZfbmNfaHQ9dmlkZW8tZWN2MS0xLnh4Jm9oPTAwX0FULVl0aC1vT2lCWTV0WVVVaF9vbnZaRWZ4RkU5SDFkcXdVeno3NWQ1WXNVRHcmb2U9NjJCQ0U5NkEiLCJpYXQiOjE2NTQxNTgwNDV9.JiucwIqOJ1NgPXSFgUuXvcyar0fFrA-ylEyyUhxwKts",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "origin",
+      "value": "http://localhost:4005/",
+      "type": "string"
+    },
+    {
+      "key": "onrender-origin",
+      "value": "https://francesco-fabrissin-back-final-project.onrender.com/",
+      "type": "string"
+    }
+  ]
 }
