@@ -146,7 +146,7 @@ describe("Given a getCollection function", () => {
   describe("When invoked with a valid token", () => {
     test("Then it should call the response's status method with 200 and the json methos with an array of records", async () => {
       const expectedStatus = 200;
-      const expectedJsonResponse = mockRecords;
+      const expectedJsonResponse = { records: mockRecords };
 
       User.findOne = jest.fn(() => ({
         populate: jest.fn().mockReturnValue({
