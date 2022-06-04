@@ -2,6 +2,7 @@ const { default: mongoose } = require("mongoose");
 const request = require("supertest");
 const connectDB = require("../database");
 const User = require("../database/models/User");
+// const mockRecords = require("../mocks/mockRecords");
 const mockUsers = require("../mocks/mockUsers");
 const app = require("../server/index");
 
@@ -30,11 +31,11 @@ afterAll(async () => {
 describe("Given a POST/user/login endpoint", () => {
   describe("When it receives a request with a users present in the database", () => {
     test("Then it should respond with a 200 status and a token", async () => {
+      jest.setTimeout(20000);
       const user = {
         username: "fra432",
         password: "fra432",
       };
-
       const {
         body: { token },
       } = await request(app).post("/user/login").send(user).expect(200);
