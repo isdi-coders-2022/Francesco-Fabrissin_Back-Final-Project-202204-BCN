@@ -103,7 +103,7 @@ const getCollection = async (req, res, next) => {
         model: Record,
       },
     });
-    res.status(200).json(records);
+    res.status(200).json({ records });
   } catch {
     const error = customError(400, "Bad request");
     next(error);
