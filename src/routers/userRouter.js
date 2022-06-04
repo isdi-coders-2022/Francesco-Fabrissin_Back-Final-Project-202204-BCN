@@ -2,12 +2,7 @@ const express = require("express");
 const { validate } = require("express-validation");
 const multer = require("multer");
 const path = require("path");
-const {
-  userLogin,
-  userRegister,
-  getCollection,
-} = require("../controllers/userControllers");
-const auth = require("../server/middlewares/auth");
+const { userLogin, userRegister } = require("../controllers/userControllers");
 const {
   credentialsLoginSchema,
   credentialsRegisterSchema,
@@ -29,6 +24,5 @@ userRouter.post(
   validate(credentialsRegisterSchema),
   userRegister
 );
-userRouter.get("/", auth, getCollection);
 
 module.exports = userRouter;

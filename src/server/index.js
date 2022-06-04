@@ -9,23 +9,15 @@ const recordsRouter = require("../routers/recordsRouter");
 
 const app = express();
 
+app.disable("x-powered-by");
 app.use(cors());
 app.use(morgan("dev"));
-app.use(
-  helmet({
-    crossOriginEmbedderPolicy: false,
-  })
-);
-app.use((_req, res, next) => {
-  res.setHeader("Cross-Origin-Resource-Policy", "same-site");
-  next();
-});
 app.use(express.static("uploads"));
 app.use(express.json());
 
 app.use("/user", userRouter);
-app.use("/myCollection", recordsRouter);
 app.use("/users", usersRouter);
+app.use("/myCollection", recordsRouter);
 
 app.use(notFoundError);
 app.use(generalError);

@@ -2,6 +2,7 @@ const express = require("express");
 const multer = require("multer");
 const path = require("path");
 const { addRecordToCollection } = require("../controllers/recordsControllers");
+const { getCollection } = require("../controllers/userControllers");
 const auth = require("../server/middlewares/auth");
 
 const recordsRouter = express.Router();
@@ -13,6 +14,7 @@ const uploadRecord = multer({
   },
 });
 
+recordsRouter.get("/", auth, getCollection);
 recordsRouter.post(
   "/",
   auth,
