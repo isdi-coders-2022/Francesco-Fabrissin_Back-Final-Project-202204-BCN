@@ -1,3 +1,5 @@
+// mockRecords = require("./mockRecords");
+
 const mockUsers = [
   {
     username: "fra432",
@@ -12,6 +14,28 @@ const mockUsers = [
   },
   {
     username: "nico",
+    password: "$2a$10$fvX34xBeots6dRezw8IQJ.g/diQHdPQefkscaQdoBXqd5ThlSggAF",
+    email: "niconico@gmail.com",
+    location: "Barcelona",
+    records_collection: {
+      collection: [],
+      genre: "Electronic",
+    },
+    wantlist: [],
+  },
+  {
+    username: "fra433",
+    password: "$2a$10$fvX34xBeots6dRezw8IQJ.g/diQHdPQefkscaQdoBXqd5ThlSggAS",
+    email: "frafra@gmail.com",
+    location: "Barcelona",
+    records_collection: {
+      collection: [],
+      genre: "Electronic",
+    },
+    wantlist: [],
+  },
+  {
+    username: "nicos",
     password: "$2a$10$fvX34xBeots6dRezw8IQJ.g/diQHdPQefkscaQdoBXqd5ThlSggAF",
     email: "niconico@gmail.com",
     location: "Barcelona",

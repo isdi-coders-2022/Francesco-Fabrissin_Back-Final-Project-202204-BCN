@@ -2,9 +2,9 @@ const mockRecords = [
   {
     title: "Neptune's Lair",
     artist: "Drexciya",
-    year: 1999,
+    year: "1999",
     genre: "Electronic",
-    price: 25,
+    price: "25",
     conditions: "VG",
     youtube_url: "https://www.youtube.com/watch?v=tF9rKnOqWfk",
     image:
@@ -15,9 +15,9 @@ const mockRecords = [
   {
     title: "Neptune's Lairs",
     artist: "Drexciya",
-    year: 1999,
+    year: "1999",
     genre: "Electronic",
-    price: 25,
+    price: "25",
     conditions: "VG",
     youtube_url: "https://www.youtube.com/watch?v=tF9rKnOqWfk",
     image:

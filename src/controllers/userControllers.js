@@ -7,7 +7,6 @@ const path = require("path");
 const chalk = require("chalk");
 const User = require("../database/models/User");
 const customError = require("../utils/customError");
-const Record = require("../database/models/Record");
 
 const userLogin = async (req, res, next) => {
   debug(chalk.yellowBright("login request received"));
@@ -90,28 +89,7 @@ const userRegister = async (req, res, next) => {
   }
 };
 
-const getCollection = async (req, res, next) => {
-  debug(chalk.yellowBright("New 'My collection' request"));
-  try {
-    const { userId } = req;
-    const {
-      records_collection: { records },
-    } = await User.findById(userId).populate({
-      path: "records_collection",
-      populate: {
-        path: "records",
-        model: Record,
-      },
-    });
-    res.status(200).json({ records });
-  } catch {
-    const error = customError(400, "Bad request");
-    next(error);
-  }
-};
-
 module.exports = {
   userLogin,
   userRegister,
-  getCollection,
 };

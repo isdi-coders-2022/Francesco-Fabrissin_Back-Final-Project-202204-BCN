@@ -7,6 +7,27 @@ const Record = require("../database/models/Record");
 const User = require("../database/models/User");
 const customError = require("../utils/customError");
 
+const getCollection = async (req, res, next) => {
+  debug(chalk.yellowBright("New 'My collection' request"));
+
+  try {
+    const { userId } = req;
+    const {
+      records_collection: { records },
+    } = await User.findById(userId).populate({
+      path: "records_collection",
+      populate: {
+        path: "records",
+        model: Record,
+      },
+    });
+    res.status(200).json({ records });
+  } catch {
+    const error = customError(400, "Bad request");
+    next(error);
+  }
+};
+
 const addRecordToCollection = async (req, res, next) => {
   debug(
     chalk.yellowBright("Request to add a record to 'My colection'received")
@@ -32,7 +53,7 @@ const addRecordToCollection = async (req, res, next) => {
     }
     const newRecord = {
       ...record,
-      image: file ? newRecordImageName : "",
+      image: file ? path.join("records", newRecordImageName) : "",
     };
 
     const addedRecord = await Record.create(newRecord);
@@ -54,4 +75,4 @@ const addRecordToCollection = async (req, res, next) => {
   }
 };
 
-module.exports = { addRecordToCollection };
+module.exports = { addRecordToCollection, getCollection };
