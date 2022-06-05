@@ -53,6 +53,7 @@ const addRecordToCollection = async (req, res, next) => {
     }
     const newRecord = {
       ...record,
+      owner: userId,
       image: file ? path.join("records", newRecordImageName) : "",
     };
 
