@@ -14,18 +14,18 @@ const mockUsers = [
     username: "nico",
     password: "$2a$10$fvX34xBeots6dRezw8IQJ.g/diQHdPQefkscaQdoBXqd5ThlSggAG",
     email: "niconico@gmail.com",
-    location: "Barcelona",
+    location: "Genova",
     records_collection: {
       collection: [],
-      genre: "Electronic",
+      genre: "Jazz",
     },
     wantlist: [],
   },
   {
     username: "fra433",
     password: "$2a$10$fvX34xBeots6dRezw8IQJ.g/diQHdPQefkscaQdoBXqd5ThlSggAS",
-    email: "frafra@gmail.com",
-    location: "Barcelona",
+    email: "fra@gmail.com",
+    location: "Udine",
     records_collection: {
       collection: [],
       genre: "Punk",
@@ -35,11 +35,11 @@ const mockUsers = [
   {
     username: "nicos",
     password: "$2a$10$fvX34xBeots6dRezw8IQJ.g/diQHdPQefkscaQdoBXqd5ThlSggAN",
-    email: "niconico@gmail.com",
-    location: "Barcelona",
+    email: "nico@gmail.com",
+    location: "Milan",
     records_collection: {
       collection: [],
-      genre: "Electronic",
+      genre: "Rock",
     },
     wantlist: [],
   },
