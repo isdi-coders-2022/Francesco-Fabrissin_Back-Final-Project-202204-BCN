@@ -69,7 +69,7 @@ const addRecordToCollection = async (req, res, next) => {
       debug(chalk.greenBright("Record added to user collection"));
     }
 
-    res.status(201).json(addedRecord);
+    res.status(201).json({ new_record: addedRecord });
   } catch {
     const error = customError(400, "Bad request", "Unable to add new record");
     next(error);
