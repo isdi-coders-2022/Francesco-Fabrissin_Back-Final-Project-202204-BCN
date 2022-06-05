@@ -5,6 +5,7 @@ const mockRecords = require("../mocks/mockRecords");
 const {
   addRecordToCollection,
   getCollection,
+  deleteRecordFromCollection,
 } = require("./recordsControllers");
 
 jest.mock("fs", () => ({
@@ -122,6 +123,53 @@ describe("Given a addRecordToCollection controller", () => {
       await addRecordToCollection(req, null, next);
 
       expect(next).toHaveBeenCalled();
+    });
+  });
+});
+
+describe("Given a deleteRecord controller", () => {
+  const expectedStatus = 200;
+
+  const req = {
+    params: {
+      recordId: 3,
+    },
+  };
+  const res = {
+    status: jest.fn().mockReturnThis(),
+    json: jest.fn(),
+  };
+  describe("When invoked with a record id corresponding to an existing records in the database in the req params", () => {
+    Record.findByIdAndDelete = jest.fn().mockResolvedValue(mockRecords[0]);
+    User.findByIdAndUpdate = jest.fn().mockResolvedValue(true);
+    test("Then it should call the response's status method with 200", async () => {
+      await deleteRecordFromCollection(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(expectedStatus);
+    });
+  });
+  test("Then it should call the response's json method with the deleted record", async () => {
+    const expectedJsonResponse = {
+      deleted_record: mockRecords[0],
+    };
+
+    await deleteRecordFromCollection(req, res);
+
+    expect(res.json).toHaveBeenCalledWith(expectedJsonResponse);
+  });
+
+  describe("When invoked with a record id not corresponding to an existing records in the database", () => {
+    test("Then it should call the next received function with ", async () => {
+      const expectedErrorMessage = "Record id not found";
+      const next = jest.fn();
+
+      const expectedError = new Error(expectedErrorMessage);
+
+      Record.findByIdAndDelete = jest.fn().mockResolvedValue(false);
+
+      await deleteRecordFromCollection(req, res, next);
+
+      expect(next).toHaveBeenCalledWith(expectedError);
     });
   });
 });
