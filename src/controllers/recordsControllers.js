@@ -30,7 +30,7 @@ const getCollection = async (req, res, next) => {
 
 const addRecordToCollection = async (req, res, next) => {
   debug(
-    chalk.yellowBright("Request to add a record to 'My colection'received")
+    chalk.yellowBright("Request to add a record to 'My colection' received")
   );
 
   try {
@@ -76,4 +76,43 @@ const addRecordToCollection = async (req, res, next) => {
   }
 };
 
-module.exports = { addRecordToCollection, getCollection };
+const deleteRecordFromCollection = async (req, res, next) => {
+  debug(
+    chalk.yellowBright(
+      "Request to delete a record from 'My colection' received"
+    )
+  );
+  const { userId } = req;
+  const { recordId } = req.params;
+
+  const deletedRecord = await Record.findByIdAndDelete(recordId);
+  if (deletedRecord) {
+    debug(
+      chalk.greenBright(`Record ${recordId} deleted from records database`)
+    );
+    const updatedCollection = await User.findByIdAndUpdate(
+      userId,
+      {
+        $pull: { "records_collection.records": recordId },
+      },
+      { new: true }
+    );
+
+    if (updatedCollection) {
+      debug(
+        chalk.greenBright(`Record ${recordId} deleted from user collection`)
+      );
+    }
+    res.status(200).json({ deleted_record: deletedRecord });
+    return;
+  }
+
+  const error = customError(404, "Bad request", "Record id not found");
+  next(error);
+};
+
+module.exports = {
+  addRecordToCollection,
+  getCollection,
+  deleteRecordFromCollection,
+};
