@@ -94,7 +94,9 @@ describe("Given a addRecordToCollection controller", () => {
       await addRecordToCollection(req, res);
 
       expect(res.status).toHaveBeenCalledWith(expectedStatus);
-      expect(res.json).toHaveBeenCalledWith(expectedJsonResponse);
+      expect(res.json).toHaveBeenCalledWith({
+        new_record: expectedJsonResponse,
+      });
     });
   });
 
