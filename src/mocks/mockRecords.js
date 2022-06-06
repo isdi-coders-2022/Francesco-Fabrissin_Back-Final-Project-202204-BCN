@@ -25,6 +25,17 @@ const mockRecords = [
     owner: "6294b3038ee0cb91581a8ce6",
     id: "6294b3fc8ee0cb91581a8ce5",
   },
+  {
+    title: "Brace & Bit",
+    artist: "Earth To Mickey",
+    year: "2019",
+    genre: "Electronic",
+    price: "20",
+    conditions: "VG",
+    youtube_url: "https://www.youtube.com/watch?v=ZXYg9xaqbHo",
+    image: "165427011007320030743_10211823465655797_1767479257_n.png",
+    owner: "6294b3038ee0cb91581a8ce6",
+  },
 ];
 
 module.exports = mockRecords;
