@@ -1,6 +1,6 @@
 const User = require("../database/models/User");
 const mockUsers = require("../mocks/mockUsers");
-const getUsers = require("./usersControllers");
+const { getUsers } = require("./usersControllers");
 
 describe("Given a getUsers function", () => {
   describe("When invoked", () => {
