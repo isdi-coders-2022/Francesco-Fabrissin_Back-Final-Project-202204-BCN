@@ -1,5 +1,5 @@
 require("dotenv").config();
-const debug = require("debug")("recordswapp:controllers:userControllers");
+const debug = require("debug")("recordswapp:controllers:recordsControllers");
 const chalk = require("chalk");
 const path = require("path");
 const fs = require("fs");

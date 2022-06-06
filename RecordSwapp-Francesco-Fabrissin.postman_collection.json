@@ -32,7 +32,7 @@
       "response": []
     },
     {
-      "name": "local register",
+      "name": "local-register",
       "request": {
         "auth": {
           "type": "noauth"
@@ -44,7 +44,7 @@
           "formdata": [
             {
               "key": "username",
-              "value": "frassxs",
+              "value": "frassxssdgll",
               "type": "text"
             },
             {
@@ -65,20 +65,22 @@
             {
               "key": "image",
               "type": "file",
-              "src": "/Users/francescofabrissin/Desktop/Foto/20030743_10211823465655797_1767479257_n.png"
+              "src": []
             }
           ]
         },
         "url": {
-          "raw": "{{origin}}/user/register",
-          "host": ["{{origin}}"],
+          "raw": "http://localhost:4005/user/register",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4005",
           "path": ["user", "register"]
         }
       },
       "response": []
     },
     {
-      "name": "onrender login",
+      "name": "onrender-login",
       "request": {
         "method": "POST",
         "header": [],
@@ -121,7 +123,7 @@
       "response": []
     },
     {
-      "name": "onrender register",
+      "name": "onrender-register",
       "request": {
         "method": "POST",
         "header": [],
@@ -162,53 +164,8 @@
         }
       },
       "response": []
-    },
-    {
-      "name": "get users with auth - local",
-      "request": {
-        "auth": {
-          "type": "bearer",
-          "bearer": [
-            {
-              "key": "token",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODhhYzU0ZWU3NmI3MGNiNTU0NGMyNSIsIm5hbWUiOiJQaWVybyIsInVzZXJuYW1lIjoicGllcnVzIiwiZnJpZW5kcyI6W10sImlhdCI6MTY1MzIxNDIxMX0.B51oPRjijEroge17wky8e3psypbKcEAE0_oLOobsM4Y",
-              "type": "string"
-            }
-          ]
-        },
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{origin}}/users",
-          "host": ["{{origin}}"],
-          "path": ["users"]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "{{onrender-origin}}users",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{onrender-origin}}users",
-          "host": ["{{onrender-origin}}users"]
-        }
-      },
-      "response": []
     }
   ],
-  "auth": {
-    "type": "bearer",
-    "bearer": [
-      {
-        "key": "token",
-        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImZyYTQzMiIsImltYWdlIjoiaHR0cHM6Ly92aWRlby1lY3YxLTEueHguZmJjZG4ubmV0L3YvdDEuNjQzNS05LzM3ODY3NjQzXzIxODE3OTAxMjg3NzIwNzlfMzQ5NjY4NTY5MDYwOTk5MTY4MF9uLmpwZz9fbmNfY2F0PTEwOCZjY2I9MS03Jl9uY19zaWQ9MDljYmZlJl9uY19vaGM9TFhTcTdRdURaZ1FBWF8xdDcwWiZfbmNfaHQ9dmlkZW8tZWN2MS0xLnh4Jm9oPTAwX0FULVl0aC1vT2lCWTV0WVVVaF9vbnZaRWZ4RkU5SDFkcXdVeno3NWQ1WXNVRHcmb2U9NjJCQ0U5NkEiLCJpYXQiOjE2NTQxNTgwNDV9.JiucwIqOJ1NgPXSFgUuXvcyar0fFrA-ylEyyUhxwKts",
-        "type": "string"
-      }
-    ]
-  },
   "event": [
     {
       "listen": "prerequest",
