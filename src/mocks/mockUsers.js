@@ -34,7 +34,7 @@ const mockUsers = [
   },
   {
     username: "nicos",
-    password: "$2a$10$fvX34xBeots6dRezw8IQJ.g/diQHdPQefkscaQdoBXqd5ThlSggAN",
+    password: "$2a$10$LsFVpdYMCNUst/DRujI4ke0Purxd3cPmjU6TqbqhgbnEv8bwjh14S",
     email: "nico@gmail.com",
     location: "Milan",
     records_collection: {
