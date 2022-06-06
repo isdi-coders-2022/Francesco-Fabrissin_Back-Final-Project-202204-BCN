@@ -1,6 +1,6 @@
 const User = require("../database/models/User");
 const mockRecords = require("../mocks/mockRecords");
-const mockUsers = require("../mocks/mockUsers");
+const { mockUsers } = require("../mocks/mockUsers");
 const { getUsers, getUserCollection } = require("./usersControllers");
 
 describe("Given a getUsers function", () => {
@@ -21,10 +21,12 @@ describe("Given a getUsers function", () => {
 
     test("Then it should call the response status method with 200", async () => {
       const collectionsInfo = mockUsers.map((user) => ({
+        id: user.id,
         username: user.username,
         location: user.location,
         image: user.image,
         genre: user.records_collection.genre,
+        records: user.records_collection.records,
       }));
 
       const expectedJsonResponse = {

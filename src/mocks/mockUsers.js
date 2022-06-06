@@ -1,11 +1,64 @@
+const mockRecords = require("./mockRecords");
+
 const mockUsers = [
+  {
+    id: "1",
+    username: "fra432",
+    password: "$2a$10$fvX34xBeots6dRezw8IQJ.g/diQHdPQefkscaQdoBXqd5ThlSggAS",
+    email: "frafra@gmail.com",
+    location: "Barcelona",
+    records_collection: {
+      records: [...mockRecords],
+      genre: "Electronic",
+    },
+    wantlist: [],
+  },
+  {
+    id: "2",
+    username: "nico",
+    password: "$2a$10$fvX34xBeots6dRezw8IQJ.g/diQHdPQefkscaQdoBXqd5ThlSggAG",
+    email: "niconico@gmail.com",
+    location: "Genova",
+    records_collection: {
+      records: [...mockRecords],
+      genre: "Jazz",
+    },
+    wantlist: [],
+  },
+  {
+    id: "3",
+    username: "fra433",
+    password: "$2a$10$fvX34xBeots6dRezw8IQJ.g/diQHdPQefkscaQdoBXqd5ThlSggAS",
+    email: "fra@gmail.com",
+    location: "Udine",
+    records_collection: {
+      records: [...mockRecords],
+      genre: "Punk",
+    },
+    wantlist: [],
+  },
+  {
+    id: "4",
+    username: "nicos",
+    password: "$2a$10$LsFVpdYMCNUst/DRujI4ke0Purxd3cPmjU6TqbqhgbnEv8bwjh14S",
+    email: "nico@gmail.com",
+    location: "Milan",
+    records_collection: {
+      records: [...mockRecords],
+      genre: "Rock",
+    },
+    wantlist: [],
+  },
+];
+
+const mockNewUsers = [
   {
     username: "fra432",
     password: "$2a$10$fvX34xBeots6dRezw8IQJ.g/diQHdPQefkscaQdoBXqd5ThlSggAS",
     email: "frafra@gmail.com",
     location: "Barcelona",
     records_collection: {
-      collection: [],
+      records: [],
       genre: "Electronic",
     },
     wantlist: [],
@@ -16,7 +69,7 @@ const mockUsers = [
     email: "niconico@gmail.com",
     location: "Genova",
     records_collection: {
-      collection: [],
+      records: [],
       genre: "Jazz",
     },
     wantlist: [],
@@ -27,7 +80,7 @@ const mockUsers = [
     email: "fra@gmail.com",
     location: "Udine",
     records_collection: {
-      collection: [],
+      records: [],
       genre: "Punk",
     },
     wantlist: [],
@@ -38,11 +91,11 @@ const mockUsers = [
     email: "nico@gmail.com",
     location: "Milan",
     records_collection: {
-      collection: [],
+      records: [],
       genre: "Rock",
     },
     wantlist: [],
   },
 ];
 
-module.exports = mockUsers;
+module.exports = { mockUsers, mockNewUsers };

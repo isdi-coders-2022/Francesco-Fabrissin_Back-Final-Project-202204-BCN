@@ -4,7 +4,7 @@ const connectDB = require("../database");
 const Record = require("../database/models/Record");
 const User = require("../database/models/User");
 const mockRecords = require("../mocks/mockRecords");
-const mockUsers = require("../mocks/mockUsers");
+const { mockNewUsers } = require("../mocks/mockUsers");
 const app = require("../server/index");
 
 beforeAll(async () => {
@@ -12,8 +12,8 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
-  await User.create(mockUsers[2]);
-  await User.create(mockUsers[3]);
+  await User.create(mockNewUsers[2]);
+  await User.create(mockNewUsers[3]);
 });
 
 beforeEach(async () => {
@@ -41,7 +41,6 @@ describe("Given a GET/myCollection endpoint", () => {
         password: "fra432",
       };
       const expectedRecords = mockRecords;
-
       const {
         body: { token },
       } = await request(app).post("/user/login").send(user).expect(200);

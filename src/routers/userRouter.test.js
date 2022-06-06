@@ -3,7 +3,7 @@ const request = require("supertest");
 const connectDB = require("../database");
 const User = require("../database/models/User");
 // const mockRecords = require("../mocks/mockRecords");
-const mockUsers = require("../mocks/mockUsers");
+const { mockNewUsers } = require("../mocks/mockUsers");
 const app = require("../server/index");
 
 jest.mock("fs", () => ({
@@ -16,8 +16,8 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
-  await User.create(mockUsers[0]);
-  await User.create(mockUsers[1]);
+  await User.create(mockNewUsers[0]);
+  await User.create(mockNewUsers[1]);
 });
 
 afterEach(async () => {
@@ -31,7 +31,6 @@ afterAll(async () => {
 describe("Given a POST/user/login endpoint", () => {
   describe("When it receives a request with a users present in the database", () => {
     test("Then it should respond with a 200 status and a token", async () => {
-      jest.setTimeout(20000);
       const user = {
         username: "fra432",
         password: "fra432",
@@ -112,8 +111,8 @@ describe("Given a POST/user/register endpoint", () => {
 });
 
 describe("Given a GET/users endpoint", () => {
-  describe("When it receives a request with a valid token", () => {
-    test("Then it should respond with a 200 status and a list of users collections", async () => {
+  describe("When it receives a request with a valid token and all there are no users with a record collection", () => {
+    test("Then it should respond with a 200 status and an empty array", async () => {
       const user = {
         username: "fra432",
         password: "fra432",
@@ -130,7 +129,7 @@ describe("Given a GET/users endpoint", () => {
         .set("Authorization", `Bearer ${token}`)
         .expect(200);
 
-      expect(usersCollection[0]).toHaveProperty("username", "fra432");
+      expect(usersCollection).toHaveLength(0);
     });
   });
 
