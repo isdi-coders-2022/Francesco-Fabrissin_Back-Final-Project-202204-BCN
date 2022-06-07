@@ -74,6 +74,7 @@ describe("Given a POST/user/register endpoint", () => {
         .type("multipart/form-data")
         .field("username", "sergio")
         .field("password", "sergio")
+        .field("genre", "Electronic")
         .attach("image", Buffer.from(testFile, "utf-8"), {
           filename: "12798217782",
           originalname: "image.jpg",
@@ -99,6 +100,7 @@ describe("Given a POST/user/register endpoint", () => {
         .field("password", "sergio")
         .field("email", "sergiosergio@gmail.com")
         .field("location", "Barcelona")
+        .field("genre", "Electronic")
         .attach("image", Buffer.from(testFile, "utf-8"), {
           filename: "12798217782",
           originalname: "image.jpg",
