@@ -133,7 +133,7 @@ const editRecordFromCollection = async (req, res, next) => {
 
     const newRecord = {
       ...record,
-      image: file ? path.join("records", newRecordImageName) : "",
+      image: file ? path.join("records", newRecordImageName) : record.image,
     };
 
     const updatedRecord = await Record.findByIdAndUpdate(recordId, newRecord, {
