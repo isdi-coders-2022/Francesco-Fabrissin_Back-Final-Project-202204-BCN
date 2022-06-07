@@ -5,6 +5,7 @@ const { notFoundError, generalError } = require("./middlewares/errors");
 const userRouter = require("../routers/userRouter");
 const usersRouter = require("../routers/usersRouter");
 const recordsRouter = require("../routers/recordsRouter");
+const recordRouter = require("../routers/recordRouter");
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use("/user", userRouter);
 app.use("/users", usersRouter);
 app.use("/myCollection", recordsRouter);
+app.use("/records", recordRouter);
 
 app.use(notFoundError);
 app.use(generalError);
