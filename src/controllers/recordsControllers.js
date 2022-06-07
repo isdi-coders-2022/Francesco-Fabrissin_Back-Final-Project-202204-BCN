@@ -114,7 +114,7 @@ const deleteRecordFromCollection = async (req, res, next) => {
 const editRecordFromCollection = async (req, res, next) => {
   try {
     const { recordId } = req.params;
-    const record = req.body;
+    let record = req.body;
     const { file } = req;
     debug(chalk.yellowBright(`Request to edit ${recordId} record  received`));
 
@@ -131,12 +131,14 @@ const editRecordFromCollection = async (req, res, next) => {
       );
     }
 
-    const newRecord = {
-      ...record,
-      image: file ? path.join("records", newRecordImageName) : record.image,
-    };
+    if (file) {
+      record = {
+        ...record,
+        image: path.join("records", newRecordImageName),
+      };
+    }
 
-    const updatedRecord = await Record.findByIdAndUpdate(recordId, newRecord, {
+    const updatedRecord = await Record.findByIdAndUpdate(recordId, record, {
       new: true,
     });
     debug(chalk.greenBright(`Record ${recordId} deleted from user collection`));
