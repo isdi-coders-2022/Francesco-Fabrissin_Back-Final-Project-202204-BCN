@@ -6,6 +6,7 @@ const {
   addRecordToCollection,
   getCollection,
   deleteRecordFromCollection,
+  editRecordFromCollection,
 } = require("./recordsControllers");
 
 jest.mock("fs", () => ({
@@ -168,6 +169,59 @@ describe("Given a deleteRecord controller", () => {
       Record.findByIdAndDelete = jest.fn().mockResolvedValue(false);
 
       await deleteRecordFromCollection(req, res, next);
+
+      expect(next).toHaveBeenCalledWith(expectedError);
+    });
+  });
+});
+
+describe("Given a editRecordFromCollection controller", () => {
+  describe("When it receives a request with a record id present in the db and the record updated in the body", () => {
+    test("Then it should call the response's status method  with 200 and the record updated in the json method", async () => {
+      const req = {
+        params: {
+          recordId: "1",
+        },
+        body: mockRecords[0],
+        file: {
+          filename: "12798217782",
+          originalname: "image.jpg",
+        },
+      };
+
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+
+      const expectedStatus = 200;
+      const expectedJsonResponse = {
+        updatedRecord: mockRecords[0],
+      };
+
+      jest.spyOn(path, "join").mockResolvedValue("image");
+
+      Record.findByIdAndUpdate = jest.fn().mockReturnValue(mockRecords[0]);
+
+      await editRecordFromCollection(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(expectedStatus);
+      expect(res.json).toHaveBeenCalledWith(expectedJsonResponse);
+    });
+  });
+
+  describe("When it receives a request with a record id not present in the db", () => {
+    test("Then it should call the next received function with an error 'Id not found, could not update the record'", async () => {
+      const expectedErrorMessage = "Id not found, could not update the record";
+      const expectedError = new Error(expectedErrorMessage);
+
+      const next = jest.fn();
+
+      jest.spyOn(path, "join").mockResolvedValue("image");
+
+      Record.findByIdAndUpdate = jest.fn().mockRejectedValue();
+
+      await editRecordFromCollection(null, null, next);
 
       expect(next).toHaveBeenCalledWith(expectedError);
     });

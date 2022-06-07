@@ -116,7 +116,6 @@ const editRecordFromCollection = async (req, res, next) => {
     const { recordId } = req.params;
     const record = req.body;
     const { file } = req;
-
     debug(chalk.yellowBright(`Request to edit ${recordId} record  received`));
 
     const newRecordImageName = file ? `${Date.now()}${file.originalname}` : "";
