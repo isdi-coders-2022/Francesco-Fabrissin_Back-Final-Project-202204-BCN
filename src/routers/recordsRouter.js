@@ -27,7 +27,7 @@ recordsRouter.post(
 );
 recordsRouter.delete("/:recordId", auth, deleteRecordFromCollection);
 recordsRouter.put(
-  "/:recordId",
+  "/edit/:recordId",
   auth,
   uploadRecord.single("image"),
   editRecordFromCollection
