@@ -111,8 +111,49 @@ const deleteRecordFromCollection = async (req, res, next) => {
   next(error);
 };
 
+const editRecordFromCollection = async (req, res, next) => {
+  try {
+    const { recordId } = req.params;
+    const record = req.body;
+    const { file } = req;
+    debug(chalk.yellowBright(`Request to edit ${recordId} record  received`));
+
+    const newRecordImageName = file ? `${Date.now()}${file.originalname}` : "";
+    if (file) {
+      fs.rename(
+        path.join("uploads", "records", file.filename),
+        path.join("uploads", "records", newRecordImageName),
+        async (error) => {
+          if (error) {
+            next(error);
+          }
+        }
+      );
+    }
+
+    const newRecord = {
+      ...record,
+      image: file ? path.join("records", newRecordImageName) : "",
+    };
+
+    const updatedRecord = await Record.findByIdAndUpdate(recordId, newRecord, {
+      new: true,
+    });
+    debug(chalk.greenBright(`Record ${recordId} deleted from user collection`));
+    res.status(200).json({ updatedRecord });
+  } catch {
+    const error = customError(
+      404,
+      "Not found",
+      "Id not found, could not update the record"
+    );
+    next(error);
+  }
+};
+
 module.exports = {
   addRecordToCollection,
   getCollection,
   deleteRecordFromCollection,
+  editRecordFromCollection,
 };

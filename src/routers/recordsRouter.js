@@ -5,6 +5,7 @@ const {
   addRecordToCollection,
   getCollection,
   deleteRecordFromCollection,
+  editRecordFromCollection,
 } = require("../controllers/recordsControllers");
 const auth = require("../server/middlewares/auth");
 
@@ -25,5 +26,11 @@ recordsRouter.post(
   addRecordToCollection
 );
 recordsRouter.delete("/:recordId", auth, deleteRecordFromCollection);
+recordsRouter.put(
+  "/:recordId",
+  auth,
+  uploadRecord.single("image"),
+  editRecordFromCollection
+);
 
 module.exports = recordsRouter;
