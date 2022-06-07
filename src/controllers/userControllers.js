@@ -45,8 +45,9 @@ const userLogin = async (req, res, next) => {
 
 const userRegister = async (req, res, next) => {
   debug(chalk.yellowBright("New registration request received"));
+
   try {
-    const { username, password, email, location } = req.body;
+    const { username, password, email, location, genre } = req.body;
     const { file } = req;
 
     const user = await User.findOne({ username });
@@ -79,6 +80,9 @@ const userRegister = async (req, res, next) => {
       email,
       location,
       image: file ? path.join("images", newImageName) : "",
+      records_collection: {
+        genre,
+      },
     };
 
     await User.create(newUser);

@@ -33,7 +33,7 @@ const UserSchema = new Schema({
     },
     genre: {
       type: String,
-      default: "Mixed",
+      require: true,
     },
   },
   wantlist: {

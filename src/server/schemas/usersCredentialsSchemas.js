@@ -25,6 +25,7 @@ const credentialsRegisterSchema = {
       .message({ message: "Password is required" })
       .required(),
     location: Joi.string().required(),
+    genre: Joi.string().required(),
     image: Joi.string().allow(null, ""),
   }),
 };
