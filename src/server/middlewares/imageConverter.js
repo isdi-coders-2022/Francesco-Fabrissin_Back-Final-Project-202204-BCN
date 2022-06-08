@@ -35,14 +35,13 @@ const imageConverter = async (req, res, next) => {
           return;
         }
 
-        fs.readFile(
+        await fs.readFile(
           path.join("uploads", "images", newImageName),
           async (readError, readFile) => {
             if (readError) {
               next(readError);
               return;
             }
-
             const storage = getStorage(firebaseApp);
 
             const storageRef = ref(storage, newImageName);
@@ -57,11 +56,16 @@ const imageConverter = async (req, res, next) => {
             req.newImageName = newImageName;
             req.firebaseFileURL = firebaseFileURL;
 
-            next();
+            if (firebaseFileURL) {
+              next();
+            }
           }
         );
       }
     );
+    if (firebaseFileURL) {
+      next();
+    }
   } else {
     next();
   }
