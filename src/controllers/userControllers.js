@@ -2,7 +2,6 @@ require("dotenv").config();
 const debug = require("debug")("recordswapp:controllers:userControllers");
 const bcrypt = require("bcrypt");
 const jsonwebtoken = require("jsonwebtoken");
-const fs = require("fs");
 const path = require("path");
 const chalk = require("chalk");
 const User = require("../database/models/User");
@@ -48,7 +47,7 @@ const userRegister = async (req, res, next) => {
 
   try {
     const { username, password, email, location, genre } = req.body;
-    const { file } = req;
+    const { file, newImageName, firebaseFileURL } = req;
 
     const user = await User.findOne({ username });
 
@@ -56,20 +55,6 @@ const userRegister = async (req, res, next) => {
       const error = customError(409, "Conflict", "This user already exists");
       next(error);
       return;
-    }
-
-    const newImageName = file ? `${Date.now()}${file.originalname}` : "";
-
-    if (file) {
-      fs.rename(
-        path.join("uploads", "images", file.filename),
-        path.join("uploads", "images", newImageName),
-        async (error) => {
-          if (error) {
-            next(error);
-          }
-        }
-      );
     }
 
     const encryptedPassword = await bcrypt.hash(password, 10);
@@ -80,6 +65,7 @@ const userRegister = async (req, res, next) => {
       email,
       location,
       image: file ? path.join("images", newImageName) : "",
+      imageBackup: file ? firebaseFileURL : "",
       records_collection: {
         genre,
       },

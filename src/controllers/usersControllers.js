@@ -36,6 +36,8 @@ const getUserCollection = async (req, res, next) => {
     const { userId } = req.params;
 
     const {
+      username,
+      image,
       records_collection: { records },
     } = await User.findById(userId).populate({
       path: "records_collection",
@@ -44,7 +46,10 @@ const getUserCollection = async (req, res, next) => {
         model: Record,
       },
     });
-    res.status(200).json({ records });
+    res.status(200).json({
+      userInfo: { username, image },
+      records,
+    });
   } catch {
     const error = customError(400, "Bad request", "Collection not found");
     next(error);
