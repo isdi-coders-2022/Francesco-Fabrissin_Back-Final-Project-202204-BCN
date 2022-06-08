@@ -100,11 +100,10 @@ const deleteRecordFromCollection = async (req, res, next) => {
 
 const editRecordFromCollection = async (req, res, next) => {
   try {
-    const { recordId, newImageName, firebaseFileURL } = req.params;
+    const { recordId } = req.params;
     let record = req.body;
-    const { file } = req;
+    const { file, newImageName, firebaseFileURL } = req;
     debug(chalk.yellowBright(`Request to edit ${recordId} record  received`));
-
     if (file) {
       record = {
         ...record,
