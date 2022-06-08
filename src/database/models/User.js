@@ -21,6 +21,9 @@ const UserSchema = new Schema({
   image: {
     type: String,
   },
+  imageBackup: {
+    type: String,
+  },
   records_collection: {
     records: {
       type: [

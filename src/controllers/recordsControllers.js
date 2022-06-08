@@ -2,7 +2,6 @@ require("dotenv").config();
 const debug = require("debug")("recordswapp:controllers:recordsControllers");
 const chalk = require("chalk");
 const path = require("path");
-const fs = require("fs");
 const Record = require("../database/models/Record");
 const User = require("../database/models/User");
 const customError = require("../utils/customError");
@@ -34,27 +33,15 @@ const addRecordToCollection = async (req, res, next) => {
   );
 
   try {
-    const { userId } = req;
+    const { userId, newImageName, firebaseFileURL } = req;
     const record = req.body;
     const { file } = req;
 
-    const newRecordImageName = file ? `${Date.now()}${file.originalname}` : "";
-
-    if (file) {
-      fs.rename(
-        path.join("uploads", "records", file.filename),
-        path.join("uploads", "records", newRecordImageName),
-        async (error) => {
-          if (error) {
-            next(error);
-          }
-        }
-      );
-    }
     const newRecord = {
       ...record,
       owner: userId,
-      image: file ? path.join("records", newRecordImageName) : "",
+      image: file ? path.join("images", newImageName) : "",
+      imageBackup: file ? firebaseFileURL : "",
     };
 
     const addedRecord = await Record.create(newRecord);
@@ -113,28 +100,16 @@ const deleteRecordFromCollection = async (req, res, next) => {
 
 const editRecordFromCollection = async (req, res, next) => {
   try {
-    const { recordId } = req.params;
+    const { recordId, newImageName, firebaseFileURL } = req.params;
     let record = req.body;
     const { file } = req;
     debug(chalk.yellowBright(`Request to edit ${recordId} record  received`));
 
-    const newRecordImageName = file ? `${Date.now()}${file.originalname}` : "";
-    if (file) {
-      fs.rename(
-        path.join("uploads", "records", file.filename),
-        path.join("uploads", "records", newRecordImageName),
-        async (error) => {
-          if (error) {
-            next(error);
-          }
-        }
-      );
-    }
-
     if (file) {
       record = {
         ...record,
-        image: path.join("records", newRecordImageName),
+        image: path.join("images", newImageName),
+        imageBackup: file ? firebaseFileURL : "",
       };
     }
 

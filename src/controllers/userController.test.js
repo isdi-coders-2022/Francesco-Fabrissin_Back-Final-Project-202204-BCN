@@ -7,11 +7,6 @@ const { userLogin, userRegister } = require("./userControllers");
 
 const mockToken = "token";
 
-jest.mock("fs", () => ({
-  ...jest.requireActual("fs"),
-  rename: jest.fn().mockReturnValue("1234image.jpg"),
-}));
-
 describe("Given a userLogin function", () => {
   const req = {
     body: mockUsers[0],

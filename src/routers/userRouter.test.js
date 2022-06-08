@@ -61,57 +61,6 @@ describe("Given a POST/user/login endpoint", () => {
   });
 });
 
-describe("Given a POST/user/register endpoint", () => {
-  describe("When it receives a request with wrong user credentials", () => {
-    test("Then it should respond with a 400 status and a 'Bad request error message'", async () => {
-      const expectedErrorMessage = "Bad request";
-      const testFile = "test file";
-
-      const {
-        body: { message },
-      } = await request(app)
-        .post("/user/register")
-        .type("multipart/form-data")
-        .field("username", "sergio")
-        .field("password", "sergio")
-        .field("genre", "Electronic")
-        .attach("image", Buffer.from(testFile, "utf-8"), {
-          filename: "12798217782",
-          originalname: "image.jpg",
-        })
-        .expect(400);
-
-      expect(message).toBe(expectedErrorMessage);
-    });
-  });
-
-  describe("When it receives a request with a users not present in the database", () => {
-    test("Then it should respond with a 200 status and a token", async () => {
-      const testFile = "test file";
-
-      const {
-        body: {
-          new_user: { username },
-        },
-      } = await request(app)
-        .post("/user/register")
-        .type("multipart/form-data")
-        .field("username", "sergio")
-        .field("password", "sergio")
-        .field("email", "sergiosergio@gmail.com")
-        .field("location", "Barcelona")
-        .field("genre", "Electronic")
-        .attach("image", Buffer.from(testFile, "utf-8"), {
-          filename: "12798217782",
-          originalname: "image.jpg",
-        })
-        .expect(201);
-
-      expect(username).toBe("sergio");
-    });
-  });
-});
-
 describe("Given a GET/users endpoint", () => {
   describe("When it receives a request with a valid token and all there are no users with a record collection", () => {
     test("Then it should respond with a 200 status and an empty array", async () => {

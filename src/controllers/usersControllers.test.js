@@ -68,11 +68,18 @@ describe("Given a getUserCollection controller", () => {
     test("Then it should call the responses's status method with 200 and the json method with the user collection", async () => {
       const expectedStatus = 200;
       const expectedJsonResponse = {
+        userInfo: {
+          username: "fra432",
+          image: "",
+        },
         records: mockRecords,
       };
 
       User.findOne = jest.fn(() => ({
         populate: jest.fn().mockReturnValue({
+          username: "fra432",
+          image: "",
+
           records_collection: {
             records: mockRecords,
           },

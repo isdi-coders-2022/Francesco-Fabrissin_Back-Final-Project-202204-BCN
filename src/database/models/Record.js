@@ -31,6 +31,9 @@ const RecordSchema = new Schema({
   image: {
     type: String,
   },
+  imageBackup: {
+    type: String,
+  },
   owner: {
     type: Schema.Types.ObjectId,
     required: true,
