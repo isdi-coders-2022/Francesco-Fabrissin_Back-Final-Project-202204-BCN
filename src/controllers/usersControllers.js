@@ -16,9 +16,10 @@ const getUsers = async (req, res, next) => {
           username,
           location,
           image,
+          imageBackup,
           records_collection: { genre, records },
         } = user;
-        return { id, username, location, image, genre, records };
+        return { id, username, location, image, imageBackup, genre, records };
       })
       .filter((user) => user.records.length !== 0);
 
@@ -38,6 +39,7 @@ const getUserCollection = async (req, res, next) => {
     const {
       username,
       image,
+      imageBackup,
       records_collection: { records },
     } = await User.findById(userId).populate({
       path: "records_collection",
@@ -47,7 +49,7 @@ const getUserCollection = async (req, res, next) => {
       },
     });
     res.status(200).json({
-      userInfo: { username, image },
+      userInfo: { username, image, imageBackup },
       records,
     });
   } catch {
