@@ -62,8 +62,8 @@ describe("Given a POST/user/login endpoint", () => {
 });
 
 describe("Given a GET/users endpoint", () => {
-  describe("When it receives a request with a valid token", () => {
-    test("Then it should respond with a 200 status and an array of 2 users", async () => {
+  describe("When it receives a request with a valid token but users have no records in their collections", () => {
+    test("Then it should respond with a 200 status and a empty array", async () => {
       const user = {
         username: "fra432",
         password: "fra432",
@@ -80,7 +80,7 @@ describe("Given a GET/users endpoint", () => {
         .set("Authorization", `Bearer ${token}`)
         .expect(200);
 
-      expect(usersCollection).toHaveLength(2);
+      expect(usersCollection).toHaveLength(0);
     });
   });
 
