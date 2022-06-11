@@ -7,6 +7,8 @@ const mockUsers = [
     password: "$2a$10$fvX34xBeots6dRezw8IQJ.g/diQHdPQefkscaQdoBXqd5ThlSggAS",
     email: "frafra@gmail.com",
     location: "Barcelona",
+    image: "image",
+    imageBackup: "image",
     records_collection: {
       records: [...mockRecords],
       genre: "Electronic",
@@ -19,6 +21,8 @@ const mockUsers = [
     password: "$2a$10$fvX34xBeots6dRezw8IQJ.g/diQHdPQefkscaQdoBXqd5ThlSggAG",
     email: "niconico@gmail.com",
     location: "Genova",
+    image: "image",
+    imageBackup: "image",
     records_collection: {
       records: [...mockRecords],
       genre: "Jazz",
@@ -31,6 +35,8 @@ const mockUsers = [
     password: "$2a$10$fvX34xBeots6dRezw8IQJ.g/diQHdPQefkscaQdoBXqd5ThlSggAS",
     email: "fra@gmail.com",
     location: "Udine",
+    image: "image",
+    imageBackup: "image",
     records_collection: {
       records: [...mockRecords],
       genre: "Punk",
@@ -43,6 +49,8 @@ const mockUsers = [
     password: "$2a$10$LsFVpdYMCNUst/DRujI4ke0Purxd3cPmjU6TqbqhgbnEv8bwjh14S",
     email: "nico@gmail.com",
     location: "Milan",
+    image: "image",
+    imageBackup: "image",
     records_collection: {
       records: [...mockRecords],
       genre: "Rock",

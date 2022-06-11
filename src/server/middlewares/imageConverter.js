@@ -26,7 +26,7 @@ const imageConverter = async (req, res, next) => {
   let firebaseFileURL;
 
   if (file) {
-    await fs.rename(
+    fs.rename(
       path.join("uploads", "images", file.filename),
       path.join("uploads", "images", newImageName),
       async (error) => {
@@ -35,7 +35,7 @@ const imageConverter = async (req, res, next) => {
           return;
         }
 
-        await fs.readFile(
+        fs.readFile(
           path.join("uploads", "images", newImageName),
           async (readError, readFile) => {
             if (readError) {
