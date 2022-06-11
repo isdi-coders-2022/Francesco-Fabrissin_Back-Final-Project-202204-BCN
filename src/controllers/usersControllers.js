@@ -13,7 +13,9 @@ const getUsers = async (req, res, next) => {
       ? await User.find({ "records_collection.genre": filter }).limit(limit)
       : await User.find().limit(limit);
 
-    const count = await User.count();
+    const count = filter
+      ? await User.find({ "records_collection.genre": filter }).count()
+      : await User.count();
     const pages = await Math.ceil(count / 8);
 
     const usersCollection = users.map((user) => {
