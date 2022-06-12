@@ -5,7 +5,7 @@ const { getUsers } = require("./usersControllers");
 jest.mock("../database/models/User", () => ({
   find: jest.fn().mockReturnThis(),
   limit: jest.fn().mockReturnValue(mockUsers),
-  count: jest.fn().mockReturnValue(8),
+  count: jest.fn().mockReturnValue(2),
 }));
 
 describe("Given a getUsers function", () => {

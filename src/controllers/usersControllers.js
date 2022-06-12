@@ -21,16 +21,16 @@ const getUsers = async (req, res, next) => {
         }).limit(limit);
 
     const count = filter
-      ? await User.find({
+      ? await User.count({
           $and: [
             { "records_collection.records.0": { $exists: true } },
             { "records_collection.genre": filter },
           ],
-        }).count()
+        })
       : await User.count({
           "records_collection.records.0": { $exists: true },
         });
-    const pages = await Math.ceil(count / 8);
+    const pages = await Math.ceil(count / 5);
 
     const usersCollection = users.map((user) => {
       const {
