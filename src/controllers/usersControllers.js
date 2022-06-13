@@ -30,7 +30,7 @@ const getUsers = async (req, res, next) => {
       : await User.count({
           "records_collection.records.0": { $exists: true },
         });
-    const pages = await Math.ceil(count / 5);
+    const pages = Math.ceil(count / 5);
 
     const usersCollection = users.map((user) => {
       const {
