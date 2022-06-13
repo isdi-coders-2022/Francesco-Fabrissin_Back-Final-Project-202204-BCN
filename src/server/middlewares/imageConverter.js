@@ -63,9 +63,6 @@ const imageConverter = async (req, res, next) => {
         );
       }
     );
-    if (firebaseFileURL) {
-      next();
-    }
   } else {
     next();
   }
