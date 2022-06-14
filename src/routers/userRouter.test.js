@@ -61,6 +61,22 @@ describe("Given a POST/user/login endpoint", () => {
   });
 });
 
+describe("When it receives a request with a users with wrong credentials", () => {
+  test("Then it should respond with an error and a 400 status", async () => {
+    const user = {
+      username: "piero",
+    };
+
+    const expectedErrorMessage = "Bad request";
+
+    const {
+      body: { message },
+    } = await request(app).post("/user/login").send(user).expect(400);
+
+    expect(message).toBe(expectedErrorMessage);
+  });
+});
+
 describe("Given a GET/users endpoint", () => {
   describe("When it receives a request with a valid token but users have no records in their collections", () => {
     test("Then it should respond with a 200 status and a empty array", async () => {
