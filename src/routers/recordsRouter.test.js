@@ -7,6 +7,13 @@ const mockRecords = require("../mocks/mockRecords");
 const { mockNewUsers } = require("../mocks/mockUsers");
 const app = require("../server/index");
 
+jest.mock("firebase/storage", () => ({
+  ref: jest.fn().mockReturnValue("avatarRef"),
+  uploadBytes: jest.fn().mockResolvedValue(),
+  getStorage: jest.fn(),
+  getDownloadURL: jest.fn().mockResolvedValue("url"),
+}));
+
 beforeAll(async () => {
   await connectDB(process.env.MONGO_CONNECTION_TEST);
 });
@@ -36,6 +43,8 @@ afterAll(async () => {
 describe("Given a GET/myCollection endpoint", () => {
   describe("When it receives a request with a valid token", () => {
     test("Then it should respond with a status 200 and a the user collection", async () => {
+      jest.setTimeout(20000);
+
       const user = {
         username: "fra433",
         password: "fra432",
@@ -83,6 +92,40 @@ describe("Given a DELETE/myCollection/:recordId endpoint", () => {
         .expect(200);
 
       expect(deleted_record).toHaveProperty("title", "Brace & Bit");
+    });
+  });
+});
+
+describe("Given a POST/myCollection/ endpoint", () => {
+  describe("When it receives a request with a new record", () => {
+    test("Then it should respond with a 201 status and the record added in the response'", async () => {
+      const testFile = "test file";
+
+      const token =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYTg2NDMwYmI0MjRiN2ZmOTMyNjc0MiIsInVzZXJuYW1lIjoiZnJhNDMzIiwiaWF0IjoxNjU1MjAyODY5fQ.zKTq2oZtRgYYoIhZ1KDavCC8m8cE79n_8LIZO1TN9qU";
+      User.findById = jest.fn().mockResolvedValue(mockNewUsers[2]);
+
+      const {
+        // eslint-disable-next-line camelcase
+        body: { new_record },
+      } = await request(app)
+        .post("/myCollection/")
+        .type("multipart/form-data")
+        .field("title", "Neptune's Lair")
+        .field("artist", "Drexciya")
+        .field("year", "1999")
+        .field("genre", "Electronic")
+        .field("price", "25")
+        .field("youtube_url", "https://www.youtube.com/watch?v=tF9rKnOqWfk")
+        .field("conditions", "VG")
+        .attach("image", Buffer.from(testFile, "utf-8"), {
+          filename: "12798217782",
+          originalname: "image.jpg",
+        })
+        .set("Authorization", `Bearer ${token}`)
+        .expect(201);
+
+      expect(new_record).toHaveProperty("title", mockRecords[0].title);
     });
   });
 });
