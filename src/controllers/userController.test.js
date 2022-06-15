@@ -70,14 +70,6 @@ describe("Given a userLogin function", () => {
 });
 
 describe("Given a userRegister function", () => {
-  const req = {
-    body: mockUsers[0],
-    file: {
-      filename: "12798217782",
-      originalname: "image.jpg",
-    },
-  };
-
   const res = {
     status: jest.fn().mockReturnThis(),
     json: jest.fn(),
@@ -87,6 +79,33 @@ describe("Given a userRegister function", () => {
 
   describe("When invoked with new users credentials in its body", () => {
     test("Then it should call the response's status method with 201", async () => {
+      const req = {
+        body: mockUsers[0],
+        file: {
+          filename: "12798217782",
+          originalname: "image.jpg",
+        },
+      };
+
+      const expectedStatus = 201;
+
+      User.findOne = jest.fn().mockResolvedValue(false);
+      bcrypt.hash = jest.fn().mockResolvedValue("hashedPassword");
+      User.create = jest.fn().mockResolvedValue(mockUsers[0]);
+
+      await userRegister(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(expectedStatus);
+    });
+  });
+
+  describe("When invoked with new users credentials in its body but no file", () => {
+    test("Then it should call the response's status method with 201", async () => {
+      const req = {
+        body: mockUsers[0],
+        file: null,
+      };
+
       const expectedStatus = 201;
 
       User.findOne = jest.fn().mockResolvedValue(false);
@@ -101,6 +120,11 @@ describe("Given a userRegister function", () => {
 
   describe("When it is called with a user that is already in the database", () => {
     test("Then it should call the 'next' received function with an error 'This user already exists'", async () => {
+      const req = {
+        body: mockUsers[0],
+        file: null,
+      };
+
       const expectedErrorMessage = "This user already exists";
 
       const next = jest.fn();
@@ -116,6 +140,14 @@ describe("Given a userRegister function", () => {
 
   describe("When it is called and the User.create method fails", () => {
     test("Then it should call the 'next' received function", async () => {
+      const req = {
+        body: mockUsers[0],
+        file: {
+          filename: "12798217782",
+          originalname: "image.jpg",
+        },
+      };
+
       const next = jest.fn();
 
       User.findOne = jest.fn().mockResolvedValue(false);
