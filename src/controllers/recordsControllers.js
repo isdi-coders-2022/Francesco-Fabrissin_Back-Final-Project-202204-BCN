@@ -49,12 +49,10 @@ const addRecordToCollection = async (req, res, next) => {
 
     const user = await User.findById(userId);
     user.records_collection.records.push(addedRecord);
-    const userUpdated = await User.findByIdAndUpdate(userId, user, {
+    await User.findByIdAndUpdate(userId, user, {
       new: true,
     });
-    if (userUpdated) {
-      debug(chalk.greenBright("Record added to user collection"));
-    }
+    debug(chalk.greenBright("Record added to user collection"));
 
     res.status(201).json({ new_record: addedRecord });
   } catch {
@@ -77,7 +75,8 @@ const deleteRecordFromCollection = async (req, res, next) => {
     debug(
       chalk.greenBright(`Record ${recordId} deleted from records database`)
     );
-    const updatedCollection = await User.findByIdAndUpdate(
+
+    await User.findByIdAndUpdate(
       userId,
       {
         $pull: { "records_collection.records": recordId },
@@ -85,11 +84,8 @@ const deleteRecordFromCollection = async (req, res, next) => {
       { new: true }
     );
 
-    if (updatedCollection) {
-      debug(
-        chalk.greenBright(`Record ${recordId} deleted from user collection`)
-      );
-    }
+    debug(chalk.greenBright(`Record ${recordId} deleted from user collection`));
+
     res.status(200).json({ deleted_record: deletedRecord });
     return;
   }
@@ -108,7 +104,7 @@ const editRecordFromCollection = async (req, res, next) => {
       record = {
         ...record,
         image: path.join("images", newImageName),
-        imageBackup: file ? firebaseFileURL : "",
+        imageBackup: firebaseFileURL,
       };
     }
 
@@ -116,6 +112,7 @@ const editRecordFromCollection = async (req, res, next) => {
       new: true,
     });
     debug(chalk.greenBright(`Record ${recordId} deleted from user collection`));
+
     res.status(200).json({ updatedRecord });
   } catch {
     const error = customError(

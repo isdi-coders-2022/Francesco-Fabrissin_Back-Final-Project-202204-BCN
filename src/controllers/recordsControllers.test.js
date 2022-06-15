@@ -59,15 +59,6 @@ describe("Given a getCollection function", () => {
 });
 
 describe("Given a addRecordToCollection controller", () => {
-  const req = {
-    body: mockRecords[0],
-    file: {
-      filename: "12798217782",
-      originalname: "image.jpg",
-    },
-    userId: 3,
-  };
-
   const res = {
     status: jest.fn().mockReturnThis(),
     json: jest.fn(),
@@ -81,6 +72,15 @@ describe("Given a addRecordToCollection controller", () => {
 
   describe("When invoked with a new record with valid credentials in the request", () => {
     test("Then it should call the response's status method with 200 and the record added in the json method", async () => {
+      const req = {
+        body: mockRecords[0],
+        file: {
+          filename: "12798217782",
+          originalname: "image.jpg",
+        },
+        userId: 3,
+      };
+
       const expectedStatus = 201;
       const user = {
         records_collection: {
@@ -104,6 +104,12 @@ describe("Given a addRecordToCollection controller", () => {
 
   describe("When invoked and the mongoose create method fails", () => {
     test("Then it should call the next received function with an error 'Unable to add new record'", async () => {
+      const req = {
+        body: mockRecords[0],
+        file: undefined,
+        userId: 3,
+      };
+
       const expectedErrorMessage = "Unable to add new record";
       const next = jest.fn();
 
@@ -119,6 +125,14 @@ describe("Given a addRecordToCollection controller", () => {
 
   describe("When invoked and the file fails to rename", () => {
     test("Then it should call the next received'", async () => {
+      const req = {
+        body: mockRecords[0],
+        file: {
+          filename: "12798217782",
+          originalname: "image.jpg",
+        },
+        userId: 3,
+      };
       const next = jest.fn();
 
       await addRecordToCollection(req, null, next);
@@ -187,6 +201,37 @@ describe("Given a editRecordFromCollection controller", () => {
           filename: "12798217782",
           originalname: "image.jpg",
         },
+      };
+
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+
+      const expectedStatus = 200;
+      const expectedJsonResponse = {
+        updatedRecord: mockRecords[0],
+      };
+
+      jest.spyOn(path, "join").mockResolvedValue("image");
+
+      Record.findByIdAndUpdate = jest.fn().mockReturnValue(mockRecords[0]);
+
+      await editRecordFromCollection(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(expectedStatus);
+      expect(res.json).toHaveBeenCalledWith(expectedJsonResponse);
+    });
+  });
+
+  describe("When it receives a request with a record id present in the db and the record updated in the body but with no file added", () => {
+    test("Then it should call the response's status method  with 200 and the record updated in the json method", async () => {
+      const req = {
+        params: {
+          recordId: "1",
+        },
+        body: mockRecords[0],
+        file: undefined,
       };
 
       const res = {

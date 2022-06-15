@@ -9,19 +9,19 @@ jest.mock("../database/models/User", () => ({
 }));
 
 describe("Given a getUsers function", () => {
+  const res = {
+    status: jest.fn().mockReturnThis(),
+    json: jest.fn(),
+  };
   describe("When invoked", () => {
-    const res = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-    };
-
-    const req = {
-      query: {
-        limit: 5,
-        filter: "",
-      },
-    };
     test("Then it should call the response status method with 200", async () => {
+      const req = {
+        query: {
+          limit: 5,
+          filter: "",
+        },
+      };
+
       const expectedStatus = 200;
 
       await getUsers(req, res);
@@ -29,7 +29,31 @@ describe("Given a getUsers function", () => {
       expect(res.status).toHaveBeenCalledWith(expectedStatus);
     });
 
+    describe("When invoked with a 'Electronic' filter", () => {
+      test("Then it should call the response status method with 200", async () => {
+        const req = {
+          query: {
+            limit: 5,
+            filter: "Electronic",
+          },
+        };
+
+        const expectedStatus = 200;
+
+        await getUsers(req, res);
+
+        expect(res.status).toHaveBeenCalledWith(expectedStatus);
+      });
+    });
+
     test("Then it should call the response json method with the collections info", async () => {
+      const req = {
+        query: {
+          limit: 5,
+          filter: "Electronic",
+        },
+      };
+
       const collectionsInfo = mockUsers.map((user) => ({
         id: user.id,
         username: user.username,
